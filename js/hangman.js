@@ -1,3 +1,4 @@
+let audio = new Audio();
 //List of hangman words to choose from
 let hangmanword = [
 	"CHEESE",
@@ -70,7 +71,7 @@ function updateHangmanPicture() {
 function checkIfGameWon() {
   if (wordStatus === answer) {
     document.getElementById('keyboard').innerHTML = 'You Won!!!';
-    let audio = new Audio('./sound/correct.mp3');
+    audio = new Audio('./sound/correct.mp3');
     audio.play();
   }
 }
@@ -79,7 +80,7 @@ function checkIfGameLost() {
   if (mistakes === maxWrong) {
     document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + answer;
     document.getElementById('keyboard').innerHTML = 'You Lost!!!';
-    let audio = new Audio('./sound/mortis.mp3');
+    audio = new Audio('./sound/mortis.mp3');
     audio.volume = 0.3; audio.play() ;
   }
 }
@@ -98,11 +99,12 @@ function reset() {
   mistakes = 0;
   guessed = [];
   document.getElementById('hangmanPic').src = './images/0.png';
-
   randomWord();
   guessedWord();
   updateMistakes();
   generateButtons();
+  audio.pause();
+  audio.currentTime = 0;
 }
 //Maximum tries allowed
 document.getElementById('maxWrong').innerHTML = maxWrong;
